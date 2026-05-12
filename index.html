@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>fsw1238 的导航与笔记</title>
+  <title>Eunoia --A good mind</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -24,13 +24,14 @@
       margin-bottom: 32px;
     }
     .header h1 {
-      font-size: 2em;
+      font-size: 2.5em;
       font-weight: 600;
       color: #2c3e50;
       margin-bottom: 16px;
+	  font-family: "楷体", "KaiTi", "STKaiti", serif;
     }
     .header h1 span {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #00bcd4 0%, #3f51b5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -194,12 +195,15 @@
   <div class="main-container">
     <!-- 头部 -->
     <div class="header">
+	<!--
       <h1>👋 你好，我是 <span>fsw1238</span></h1>
+	  -->
+	   <h1><span>至乐性余 至静性廉</span></h1>
     </div>
 
     <!-- 搜索框（可自定义搜索引擎） -->
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="搜索你喜欢的网站..." onkeydown="if(event.key==='Enter')search()">
+      <input type="text" id="searchInput" placeholder="" onkeydown="if(event.key==='Enter')search()">
       <button onclick="search()">搜索</button>
     </div>
 
