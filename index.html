@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>fsw1238 的个人导航页</title>
+  <title>fsw1238 的导航与笔记</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -273,8 +273,8 @@
     function search() {
       const query = document.getElementById('searchInput').value.trim();
       if (query) {
-        // 默认使用 Google 搜索，可改为其他搜索引擎(已变更为Bing)
-        window.open('http://cn.bing.com/search?q=%s&go=&form=QBLH&qs=n&sk=' + encodeURIComponent(query));
+        // 默认使用 Google 搜索，可改为其他搜索引擎
+        window.open('https://www.google.com/search?q=' + encodeURIComponent(query));
       }
     }
   </script>
