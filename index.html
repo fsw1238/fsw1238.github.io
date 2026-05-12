@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fsw1238 的个人导航页</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      background: #f5f7fa;
+      min-height: 100vh;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+    }
+    .main-container {
+      width: 100%;
+      max-width: 1000px;
+    }
+    /* 头部区域 */
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .header h1 {
+      font-size: 2em;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 16px;
+    }
+    .header h1 span {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* 搜索框 */
+    .search-box {
+      display: flex;
+      max-width: 500px;
+      margin: 0 auto 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      font-size: 1em;
+      outline: none;
+    }
+    .search-box button {
+      padding: 12px 24px;
+      background: #667eea;
+      color: white;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .search-box button:hover { background: #5a6fd6; }
+    
+    /* 分类区域 */
+    .category {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+    .category-header {
+      padding: 16px 20px;
+      font-size: 1.1em;
+      font-weight: 600;
+      color: #2c3e50;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .category-header .arrow {
+      transition: transform 0.2s;
+      font-size: 0.9em;
+    }
+    .category.collapsed .arrow {
+      transform: rotate(-90deg);
+    }
+    .category.collapsed .link-grid {
+      display: none;
+    }
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      padding: 20px;
+    }
+    .link-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      padding: 12px 8px;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .link-item:hover {
+      background: #f8f9ff;
+      transform: translateY(-2px);
+    }
+    .link-icon {
+      width: 40px;
+      height: 40px;
+      background: #eef0ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4em;
+      margin-bottom: 8px;
+    }
+    .link-name {
+      font-size: 0.9em;
+      color: #2c3e50;
+      text-align: center;
+    }
+    
+    /* 笔记区域（替代热搜） */
+    .notes-section {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      padding: 20px;
+    }
+    .notes-section h2 {
+      font-size: 1.1em;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .note-card {
+      background: #f8f9ff;
+      border-radius: 8px;
+      padding: 16px;
+      transition: background 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .note-card:hover {
+      background: #eef0ff;
+    }
+    .note-card h3 {
+      font-size: 1em;
+      margin-bottom: 6px;
+      color: #2c3e50;
+    }
+    .note-card p {
+      font-size: 0.85em;
+      color: #666;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .note-date {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.75em;
+      color: #aaa;
+    }
+    /* 底部 */
+    .footer {
+      text-align: center;
+      color: #aaa;
+      font-size: 0.8em;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <!-- 头部 -->
+    <div class="header">
+      <h1>👋 你好，我是 <span>fsw1238</span></h1>
+    </div>
+
+    <!-- 搜索框（可自定义搜索引擎） -->
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="搜索你喜欢的网站..." onkeydown="if(event.key==='Enter')search()">
+      <button onclick="search()">搜索</button>
+    </div>
+
+    <!-- 常用链接分类 -->
+    <div class="category">
+      <div class="category-header" onclick="this.parentElement.classList.toggle('collapsed')">
+        <span class="arrow">▼</span> 🛠️ 常用工具
+      </div>
+      <div class="link-grid">
+        <a href="https://github.com" target="_blank" class="link-item">
+          <div class="link-icon">🐙</div>
+          <div class="link-name">GitHub</div>
+        </a>
+        <a href="https://www.google.com" target="_blank" class="link-item">
+          <div class="link-icon">🔍</div>
+          <div class="link-name">Google</div>
+        </a>
+        <a href="https://translate.google.com" target="_blank" class="link-item">
+          <div class="link-icon">🌐</div>
+          <div class="link-name">翻译</div>
+        </a>
+        <!-- 这里可以继续添加 -->
+      </div>
+    </div>
+
+    <div class="category">
+      <div class="category-header" onclick="this.parentElement.classList.toggle('collapsed')">
+        <span class="arrow">▼</span> 📚 学习资源
+      </div>
+      <div class="link-grid">
+        <a href="https://developer.mozilla.org/zh-CN/" target="_blank" class="link-item">
+          <div class="link-icon">📘</div>
+          <div class="link-name">MDN</div>
+        </a>
+        <a href="https://www.freecodecamp.org/chinese/" target="_blank" class="link-item">
+          <div class="link-icon">🏕️</div>
+          <div class="link-name">FreeCodeCamp</div>
+        </a>
+        <!-- 继续添加 -->
+      </div>
+    </div>
+
+    <!-- 笔记 / 文本区域（原热搜位置） -->
+    <div class="notes-section">
+      <h2>📝 我的笔记</h2>
+      <div class="notes-grid">
+        <a href="/texts/设计原则.md" class="note-card">
+          <h3>我的 UI 设计原则</h3>
+          <p>整理了一些工作中常用的设计原则和检查清单...</p>
+          <span class="note-date">2026-05-10</span>
+        </a>
+        <a href="/texts/前端学习路线.md" class="note-card">
+          <h3>前端学习路线 2026</h3>
+          <p>从 HTML 到 React 的阶段学习路径与资源推荐。</p>
+          <span class="note-date">2026-04-28</span>
+        </a>
+        <a href="/texts/待办清单.txt" class="note-card">
+          <h3>本周待办清单</h3>
+          <p>优化个人主页 / 完成两个组件设计 / 阅读《设计心理学》第三章。</p>
+          <span class="note-date">2026-05-12</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      由 <a href="https://pages.github.com">GitHub Pages</a> 驱动 · 随时更新
+    </div>
+  </div>
+
+  <script>
+    function search() {
+      const query = document.getElementById('searchInput').value.trim();
+      if (query) {
+        // 默认使用 Google 搜索，可改为其他搜索引擎(已变更为Bing)
+        window.open('http://cn.bing.com/search?q=%s&go=&form=QBLH&qs=n&sk=' + encodeURIComponent(query));
+      }
+    }
+  </script>
+</body>
+</html>
