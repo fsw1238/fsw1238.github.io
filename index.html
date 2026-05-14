@@ -194,11 +194,8 @@
 </head>
 <body>
   <div class="main-container">
-    <!-- 头部 -->
+    <!-- 顶部信息 -->
     <div class="header">
-	<!--
-      <h1>👋 你好，我是 <span>fsw1238</span></h1>
-	  -->
 	   <h1>博学之 审问之 慎思之<br>明辨之 笃行之</h1>
     </div>
 
@@ -209,78 +206,122 @@
     </div>
 
     <!-- 常用链接分类 -->
+     <!-- 常用网页 -->
     <div class="category">
       <div class="category-header" onclick="this.parentElement.classList.toggle('collapsed')">
         <span class="arrow">▼</span> 常用网页
       </div>
+
       <div class="link-grid">
+         
+        <a href="https://marxists.incn.tech/chinese/#:~:text=%E4%B8%AD%E6%96%87%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89%E6%96%87,%E5%B7%A6%E7%BF%BC%E7%90%86%E8%AE%BA%E8%B5%84%E6%BA%90%E5%BA%93%E3%80%82" target="_blank" class="link-item">
+		      <div class="link-icon"><img src="icon/marxists.svg" alt="马克思主义文库" style="width: 24px; height: 24px;"></div>
+          <div class="link-name">马克思主义文库</div>
+        </a>
+
         <a href="https://github.com" target="_blank" class="link-item">
-		<!--
-          <div class="link-icon">🐙</div>
-		  -->
-		  <div class="link-icon"><img src="icon/github.png" alt="github" style="width: 24px; height: 24px;"></div>
+		      <div class="link-icon"><img src="icon/github.png" alt="github" style="width: 24px; height: 24px;"></div>
           <div class="link-name">github</div>
         </a>
+
+        <a href="https://dash.cloudflare.com/72753bd9b4081846f2d8b0994c34f70d/home/overview" target="_blank" class="link-item">
+          <div class="link-icon"><img src="icon/Cloudflare.svg" alt="Cloudflare" style="width: 24px; height: 24px;"></div>
+          <div class="link-name">Cloudflare</div>
+        </a>
+
         <a href="https://www.bilibili.com/" target="_blank" class="link-item">
           <div class="link-icon"><img src="icon/bilibili.ico" alt="哔哩哔哩" style="width: 24px; height: 24px;"></div>
           <div class="link-name">哔哩哔哩</div>
         </a>
-		<a href="https://www.douyin.com/?recommend=1" target="_blank" class="link-item">
+
+		    <a href="https://www.douyin.com/?recommend=1" target="_blank" class="link-item">
           <div class="link-icon"><img src="icon/douyin.png" alt="抖音" style="width: 24px; height: 24px;"></div>
           <div class="link-name">抖音</div>
         </a>
-		<a href="http://wdrs.uupan.net/" target="_blank" class="link-item">
+
+		    <a href="http://wdrs.uupan.net/" target="_blank" class="link-item">
           <div class="link-icon"><img src="icon/wdrs.ico" alt="为道日损" style="width: 24px; height: 24px;"></div>
           <div class="link-name">为道日损</div>
         </a>
-        <!-- 这里可以继续添加 -->
+
       </div>
     </div>
 
+    <!-- 常用工具列表 -->
     <div class="category">
       <div class="category-header" onclick="this.parentElement.classList.toggle('collapsed')">
         <span class="arrow">▼</span> 常用工具
       </div>
+
       <div class="link-grid">
+
+        <a href="https://gemini.google.com/app" target="_blank" class="link-item">
+          <div class="link-icon"><img src="icon/Gemini.png" alt="Gemini" style="width: 24px; height: 24px;"></div>
+          <div class="link-name">Gemini</div>
+        </a>
+
+        <a href="https://chatgpt.com" target="_blank" class="link-item">
+          <div class="link-icon"><img src="icon/ChatGPT.webp" alt="ChatGPT" style="width: 24px; height: 24px;"></div>
+          <div class="link-name">ChatGPT</div>
+        </a>
+
         <a href="https://chat.deepseek.com/" target="_blank" class="link-item">
           <div class="link-icon"><img src="icon/DeepSeek.png" alt="DeepSeek" style="width: 24px; height: 24px;"></div>
           <div class="link-name">DeepSeek</div>
         </a>
-        <a href="https://www.freecodecamp.org/chinese/" target="_blank" class="link-item">
-          <div class="link-icon">🏕️</div>
-          <div class="link-name">FreeCodeCamp</div>
+
+        <a href="https://www.kimi.com/?chat_enter_method=new_chat" target="_blank" class="link-item">
+          <div class="link-icon"><img src="icon/Kimi.png" alt="Kimi" style="width: 24px; height: 24px;"></div>
+          <div class="link-name">Kimi</div>
         </a>
-        <!-- 继续添加 -->
+
+        <a href="https://greasyfork.org/zh-CN/scripts" target="_blank" class="link-item">
+          <div class="link-icon"><img src="icon/Greasy Fork.png" alt="Greasy Fork" style="width: 24px; height: 24px;"></div>
+          <div class="link-name">Greasy Fork</div>
+        </a>
+
+        <a href="https://www.crx4chrome.com/" target="_blank" class="link-item">
+          <div class="link-icon"><img src="icon/CRX4.jpg" alt="CRX4" style="width: 24px; height: 24px;"></div>
+          <div class="link-name">CRX4</div>
+        </a>
+
       </div>
     </div>
 
-    <!-- 笔记 / 文本区域（原热搜位置） -->
+    <!-- 笔记 / 文本区域 -->
     <div class="notes-section">
       <h2>📝 我的笔记</h2>
       <div class="notes-grid">
+
         <a href="/texts/设计原则.md" class="note-card">
           <h3>我的 UI 设计原则</h3>
           <p>整理了一些工作中常用的设计原则和检查清单...</p>
           <span class="note-date">2026-05-10</span>
         </a>
+
         <a href="/texts/前端学习路线.md" class="note-card">
           <h3>前端学习路线 2026</h3>
           <p>从 HTML 到 React 的阶段学习路径与资源推荐。</p>
           <span class="note-date">2026-04-28</span>
         </a>
+
         <a href="/texts/待办清单.txt" class="note-card">
           <h3>本周待办清单</h3>
           <p>优化个人主页 / 完成两个组件设计 / 阅读《设计心理学》第三章。</p>
           <span class="note-date">2026-05-12</span>
         </a>
+
+         <a href="pages/test.html" class="note-card">
+          <h3>测试页面</h3>
+          <p>添加另外的html文件，测试读取性。</p>
+          <span class="note-date">2026-05-12</span>
+        </a>
+        
       </div>
     </div>
-
+    <!-- 底部信息 -->
     <div class="footer">
-	<!--
-      由 <a href="https://pages.github.com">GitHub Pages</a> 驱动 · 随时更新
-	  -->
-	  @2026·fsw1238·保持更新
+	  @2026·<a href="https://github.com/fsw1238">Eunoia</a>·保持更新
     </div>
   </div>
 
@@ -288,11 +329,8 @@
     function search() {
       const query = document.getElementById('searchInput').value.trim();
       if (query) {
-        // 默认使用 Google 搜索，可改为其他搜索引擎
-        <!--window.open('https://www.google.com/search?q=' + encodeURIComponent(query)); -->
-		window.open('https://cn.bing.com/search?q=' + encodeURIComponent(query));
-      }
-    }
+        window.open('https://cn.bing.com/search?q=' + encodeURIComponent(query));
+      }}
   </script>
 </body>
 </html>
