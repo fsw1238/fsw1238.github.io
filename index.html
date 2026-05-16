@@ -3,29 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eunoia - Nexus Terminal</title>
+  <title>Eunoia</title>
   <style>
     :root {
+      /* 优化：调高背景不透明度，代替原本极其消耗性能的毛玻璃效果 */
       --bg-color: #050914;
-      --panel-bg: rgba(16, 22, 38, 0.6);
+      --panel-bg: rgba(16, 22, 38, 0.95); 
       --border-glow: rgba(0, 243, 255, 0.3);
       --text-main: #e2e8f0;
       --text-dim: #8ba3b8;
       --accent-cyan: #00f3ff;
       --accent-purple: #bc13fe;
-      --scan-line: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.2), transparent);
     }
 
     /* 白天模式变量覆盖 */
     body.light-theme {
       --bg-color: #f4f7fa;
-      --panel-bg: rgba(255, 255, 255, 0.75);
+      --panel-bg: rgba(255, 255, 255, 0.95); /* 白天模式实体背景 */
       --border-glow: rgba(0, 188, 212, 0.4);
       --text-main: #1e293b;
       --text-dim: #64748b;
       --accent-cyan: #00acc1;
       --accent-purple: #8e24aa;
-      --scan-line: linear-gradient(90deg, transparent, rgba(0, 172, 193, 0.15), transparent);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,22 +32,21 @@
     body {
       font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background: var(--bg-color);
+      /* 优化：简化了背景图案的层级 */
       background-image: 
-        radial-gradient(circle at 50% 0%, #111a33 0%, transparent 50%),
         linear-gradient(0deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
-      background-size: 100% 100%, 30px 30px, 30px 30px;
+      background-size: 30px 30px;
       color: var(--text-main);
       min-height: 100vh;
       padding: 30px;
       display: flex;
       justify-content: center;
-      transition: background-color 0.4s ease, color 0.4s ease, background-image 0.4s ease;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     body.light-theme {
       background-image: 
-        radial-gradient(circle at 50% 0%, #e2e8f0 0%, transparent 50%),
         linear-gradient(0deg, rgba(0, 172, 193, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 172, 193, 0.03) 1px, transparent 1px);
     }
@@ -75,15 +73,13 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 9999;
       user-select: none;
     }
     .theme-toggle-btn:hover {
-      transform: scale(1.1) rotate(30deg);
-      box-shadow: 0 0 20px var(--accent-cyan);
+      transform: scale(1.1);
       border-color: var(--accent-cyan);
     }
     .theme-toggle-btn:active {
@@ -94,20 +90,18 @@
     .header {
       text-align: center;
       margin-bottom: 40px;
-      position: relative;
     }
     .header h1 {
       font-size: 1.8em;
       font-weight: 300;
       letter-spacing: 2px;
       color: var(--text-main);
-      text-shadow: 0 0 10px var(--border-glow);
+      text-shadow: 0 0 8px var(--border-glow);
       font-family: "楷体", "KaiTi", serif;
       line-height: 1.5;
-      transition: text-shadow 0.4s ease;
     }
 
-    /* 搜索枢纽 */
+    /* 搜索枢纽 - 移除了动画和毛玻璃 */
     .search-nexus {
       display: flex;
       max-width: 650px;
@@ -115,23 +109,12 @@
       background: var(--panel-bg);
       border: 1px solid var(--border-glow);
       border-radius: 8px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 20px rgba(0, 243, 255, 0.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       position: relative;
       overflow: hidden;
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
     }
-    .search-nexus::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%; width: 50%; height: 100%;
-      background: var(--scan-line);
-      animation: scan 3s infinite linear;
-      pointer-events: none;
-    }
-    @keyframes scan {
-      100% { left: 200%; }
-    }
+    
     .search-nexus select {
       background: transparent;
       color: var(--accent-cyan);
@@ -142,7 +125,6 @@
       outline: none;
       cursor: pointer;
       appearance: none;
-      transition: all 0.4s ease;
     }
     .search-nexus select option { 
       background: var(--bg-color); 
@@ -173,18 +155,20 @@
     }
     .search-nexus button:hover {
       background: rgba(0, 243, 255, 0.08);
-      box-shadow: inset 0 0 10px rgba(0, 243, 255, 0.2);
     }
 
-    /* 面板基础样式 (玻璃拟态) */
+    /* 面板基础样式 - 移除了毛玻璃 */
     .glass-panel {
       background: var(--panel-bg);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 12px;
       margin-bottom: 30px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      transition: all 0.4s ease;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    body.light-theme .glass-panel {
+      border-color: rgba(0, 0, 0, 0.05);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
     }
     .panel-header {
       padding: 16px 24px;
@@ -194,8 +178,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: color 0.4s ease;
     }
+    body.light-theme .panel-header { border-bottom-color: rgba(0, 0, 0, 0.05); }
     .add-btn {
       background: transparent;
       color: var(--text-dim);
@@ -209,7 +193,6 @@
     .add-btn:hover {
       color: var(--accent-cyan);
       border-color: var(--accent-cyan);
-      box-shadow: 0 0 8px var(--border-glow);
     }
 
     /* 链接网格 */
@@ -227,13 +210,13 @@
       padding: 16px 8px;
       border-radius: 8px;
       border: 1px solid transparent;
-      transition: all 0.3s;
+      transition: all 0.2s;
       position: relative;
     }
     .link-item:hover {
       background: rgba(0, 243, 255, 0.05);
       border-color: var(--border-glow);
-      transform: translateY(-3px);
+      transform: translateY(-2px);
     }
     .link-icon {
       width: 48px;
@@ -245,10 +228,10 @@
       justify-content: center;
       margin-bottom: 12px;
       border: 1px solid rgba(255,255,255,0.05);
-      transition: background 0.4s ease;
     }
     body.light-theme .link-icon {
       background: rgba(0,0,0,0.03);
+      border-color: rgba(0,0,0,0.05);
     }
     .link-icon img {
       width: 28px;
@@ -259,7 +242,6 @@
       font-size: 0.85em;
       color: var(--text-main);
       text-align: center;
-      transition: color 0.4s ease;
     }
     .delete-btn {
       position: absolute;
@@ -287,7 +269,7 @@
       border: 1px solid rgba(255,255,255,0.05);
       border-radius: 8px;
       padding: 16px;
-      transition: all 0.3s;
+      transition: all 0.2s;
       text-decoration: none;
       color: inherit;
       position: relative;
@@ -295,17 +277,17 @@
     }
     body.light-theme .note-card {
       background: rgba(0,0,0,0.02);
+      border-color: rgba(0,0,0,0.05);
     }
     .note-card:hover {
       background: rgba(188, 19, 254, 0.04);
       border-color: rgba(188, 19, 254, 0.2);
-      box-shadow: 0 0 15px rgba(188, 19, 254, 0.08);
+      transform: translateY(-2px);
     }
     .note-card h3 {
       font-size: 1em;
       margin-bottom: 8px;
       color: var(--text-main);
-      transition: color 0.4s ease;
     }
     .note-card p {
       font-size: 0.85em;
@@ -315,7 +297,6 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      transition: color 0.4s ease;
     }
     .note-date {
       display: block;
@@ -332,7 +313,6 @@
       opacity: 0.5;
       font-size: 0.8em;
       margin-top: 40px;
-      transition: color 0.4s ease;
     }
     .footer a { color: var(--accent-cyan); text-decoration: none; }
   </style>
@@ -352,14 +332,14 @@
         <option value="google">Google</option>
         <option value="baidu">Baidu</option>
       </select>
-      <input type="text" id="searchInput" placeholder="Initialize Search Sequence..." onkeydown="if(event.key==='Enter')executeSearch()">
-      <button onclick="executeSearch()">SCAN</button>
+      <input type="text" id="searchInput" placeholder="" onkeydown="if(event.key==='Enter')executeSearch()">
+      <button onclick="executeSearch()">搜 索</button>
     </div>
 
     <div class="glass-panel">
       <div class="panel-header">
         <span>常用网页</span>
-        <button class="add-btn" onclick="addNewLink('websites')">+ Add Node</button>
+        <button class="add-btn" onclick="addNewLink('websites')">+ 添加网页</button>
       </div>
       <div class="link-grid" id="websites-grid"></div>
     </div>
@@ -367,7 +347,7 @@
     <div class="glass-panel">
       <div class="panel-header">
         <span>常用工具</span>
-        <button class="add-btn" onclick="addNewLink('tools')">+ Add Tool</button>
+        <button class="add-btn" onclick="addNewLink('tools')">+ 添加工具</button>
       </div>
       <div class="link-grid" id="tools-grid"></div>
     </div>
@@ -376,34 +356,50 @@
       <div class="panel-header">
         <span>笔记文档</span>
         <input type="file" id="noteUploader" style="display: none;" accept=".txt,.md" onchange="handleNoteUpload(event)">
-        <button class="add-btn" onclick="document.getElementById('noteUploader').click()">+ Upload File</button>
+        <button class="add-btn" onclick="document.getElementById('noteUploader').click()">+ 上传文件</button>
       </div>
       <div class="notes-grid" id="notes-grid"></div>
     </div>
 
     <div class="footer">
-      @2026 · <a href="https://github.com/fsw1238" target="_blank">Eunoia Nexus</a> · SYSTEM ONLINE
+      @2026 · <a href="https://github.com/fsw1238" target="_blank">Eunoia</a> · 保持更新
     </div>
   </div>
 
   <script>
-    // --- 初始默认数据 ---
+    // --- 辅助方法：生成国内可用的 Favicon 链接 ---
+    // 这里使用了国内专门的 api.iowen.cn 图标解析服务，速度快且不被墙
+    function getFavicon(url) {
+      try {
+        const domain = new URL(url).hostname;
+        return `https://icons.duckduckgo.com/ip3/${domain}.ico`;
+      } catch(e) {
+        return "";
+      }
+    }
+    // 【方案二：国内备用：
+    // return `https://api.vvhan.com/api/ico?url=${domain}`;
+    // 【方案三：国外开源备用
+    // return `https://favicon.im/${domain}`;
+    
+    
+    // --- 初始默认数据 (已更新为国内接口) ---
     const defaultData = {
       websites: [
-        { name: "马克思主义文库", url: "https://marxists.incn.tech", icon: "https://www.google.com/s2/favicons?domain=marxists.incn.tech&sz=64" },
-        { name: "GitHub", url: "https://github.com", icon: "https://www.google.com/s2/favicons?domain=github.com&sz=64" },
-        { name: "Cloudflare", url: "https://dash.cloudflare.com", icon: "https://www.google.com/s2/favicons?domain=cloudflare.com&sz=64" },
-        { name: "哔哩哔哩", url: "https://www.bilibili.com", icon: "https://www.google.com/s2/favicons?domain=bilibili.com&sz=64" },
-        { name: "抖音", url: "https://www.douyin.com", icon: "https://www.google.com/s2/favicons?domain=douyin.com&sz=64" },
-        { name: "为道日损", url: "http://wdrs.uupan.net", icon: "https://www.google.com/s2/favicons?domain=uupan.net&sz=64" }
+        { name: "马克思主义文库", url: "https://marxists.incn.tech", icon: getFavicon("https://marxists.incn.tech") },
+        { name: "GitHub", url: "https://github.com", icon: getFavicon("https://github.com") },
+        { name: "Cloudflare", url: "https://dash.cloudflare.com", icon: getFavicon("https://dash.cloudflare.com") },
+        { name: "哔哩哔哩", url: "https://www.bilibili.com", icon: getFavicon("https://www.bilibili.com") },
+        { name: "抖音", url: "https://www.douyin.com", icon: getFavicon("https://www.douyin.com") },
+        { name: "为道日损", url: "http://wdrs.uupan.net", icon: getFavicon("http://wdrs.uupan.net") }
       ],
       tools: [
-        { name: "Gemini", url: "https://gemini.google.com", icon: "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" },
-        { name: "ChatGPT", url: "https://chatgpt.com", icon: "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" },
-        { name: "DeepSeek", url: "https://chat.deepseek.com", icon: "https://www.google.com/s2/favicons?domain=deepseek.com&sz=64" },
-        { name: "Kimi", url: "https://www.kimi.com", icon: "https://www.google.com/s2/favicons?domain=kimi.com&sz=64" },
-        { name: "Greasy Fork", url: "https://greasyfork.org", icon: "https://www.google.com/s2/favicons?domain=greasyfork.org&sz=64" },
-        { name: "CRX4", url: "https://www.crx4chrome.com", icon: "https://www.google.com/s2/favicons?domain=crx4chrome.com&sz=64" }
+        { name: "Gemini", url: "https://gemini.google.com", icon: getFavicon("https://gemini.google.com") },
+        { name: "ChatGPT", url: "https://chatgpt.com", icon: getFavicon("https://chatgpt.com") },
+        { name: "DeepSeek", url: "https://chat.deepseek.com", icon: getFavicon("https://chat.deepseek.com") },
+        { name: "Kimi", url: "https://www.kimi.com", icon: getFavicon("https://www.kimi.com") },
+        { name: "Greasy Fork", url: "https://greasyfork.org", icon: getFavicon("https://greasyfork.org") },
+        { name: "CRX4", url: "https://www.crx4chrome.com", icon: getFavicon("https://www.crx4chrome.com") }
       ],
       notes: [
         { id: 1, title: "我的 UI 设计原则", desc: "整理了一些工作中常用的设计原则和检查清单...", date: "2026-05-10" },
@@ -469,15 +465,12 @@
       const name = prompt("请输入网站名称:");
       if (!name) return;
 
-      let domain = "";
-      try {
-        domain = new URL(url).hostname;
-      } catch(e) {
-        alert("网址格式不正确，请包含 http:// 或 https://");
+      const iconUrl = getFavicon(url);
+      if (!iconUrl) {
+        alert("网址格式不正确，请务必包含 http:// 或 https://");
         return;
       }
       
-      const iconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
       const data = getData();
       data[category].push({ name, url, icon: iconUrl });
       saveData(data);
@@ -500,7 +493,7 @@
       const reader = new FileReader();
       reader.onload = function(e) {
         const content = e.target.result;
-        const desc = content.substring(0, 40).replace(/\\n/g, ' ') + '...';
+        const desc = content.substring(0, 40).replace(/\n/g, ' ') + '...';
         const today = new Date().toISOString().split('T')[0];
         
         const data = getData();
@@ -522,9 +515,9 @@
       const data = getData();
       const note = data.notes[index];
       if(note.content) {
-        alert(`【${note.title}】\\n\\n${note.content}`);
+        alert(`【${note.title}】\n\n${note.content}`);
       } else {
-        alert("具体内容请在代码中指向对应 Markdown 文件，或使用右侧按钮上传真实文本文件。");
+        alert("这是演示笔记，具体内容请在代码中指向对应 Markdown 文件，或使用右侧按钮上传真实文本文件。");
       }
     }
 
@@ -532,12 +525,17 @@
     function renderAll() {
       const data = getData();
       
+      // 这里的 onerror 处理很重要：如果某个网站连国内接口都抓不到图标，就会显示一个默认的圆形小图标，不至于破图
+      const fallbackSvg = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM4YmEzYjgiIHN0cm9rZS13aWR0aD0iMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48L3N2Zz4=";
+
       ['websites', 'tools'].forEach(category => {
         const container = document.getElementById(`${category}-grid`);
         container.innerHTML = data[category].map((item, index) => `
           <a href="${item.url}" target="_blank" class="link-item">
             <button class="delete-btn" onclick="deleteItem('${category}', ${index}, event)">×</button>
-            <div class="link-icon"><img src="${item.icon}" alt="${item.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM4YmEzYjgiIHN0cm9rZS13aWR0aD0iMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48L3N2Zz4='"></div>
+            <div class="link-icon">
+              <img src="${item.icon}" alt="${item.name}" onerror="this.src='${fallbackSvg}'">
+            </div>
             <div class="link-name">${item.name}</div>
           </a>
         `).join('');
