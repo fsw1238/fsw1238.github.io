@@ -451,10 +451,10 @@
         { name: "CRX4", url: "https://www.crx4chrome.com/", icon: "icon/CRX4.jpg" }
       ],
       notes: [
-        { id: 1, title: "我的 UI 设计原则", desc: "整理了一些工作中常用的设计原则和检查清单...", date: "2026-05-10" , url: "pages/test.html"},
-        { id: 2, title: "前端学习路线 2026", desc: "从 HTML 到 React 的阶段学习路径与资源推荐。", date: "2026-04-28"},
-        { id: 3, title: "本周待办清单", desc: "优化个人主页 / 完成两个组件设计 / 阅读《设计心理学》...", date: "2026-05-12"},
-        { id: 4, title: "读书笔记：《设计心理学》", desc: "第一章：人类行为的复杂性 / 第二章：设计中的心理模型...", date: "2026-05-15"}
+        { id: 1, title: "我的 UI 设计原则", desc: "整理了一些工作中常用的设计原则和检查清单...", date: "2026-05-10", url: "pages/test.html" },
+        { id: 2, title: "前端学习路线 2026", desc: "从 HTML 到 React 的阶段学习路径与资源推荐。", date: "2026-04-28", url: "texts/test.md" },
+        { id: 3, title: "本周待办清单", desc: "优化个人主页 / 完成两个组件设计 / 阅读《设计心理学》...", date: "2026-05-12" },
+        { id: 4, title: "读书笔记：《设计心理学》", desc: "第一章：人类行为的复杂性 / 第二章：设计中的心理模型...", date: "2026-05-15" }
       ]
     };
 
@@ -538,7 +538,7 @@
     function deleteItem(category, index, event) {
       event.preventDefault();  // 阻止基础标签默认行为
       event.stopPropagation(); // 核心核心：阻止事件冒泡！防止点击删除按钮时，错误地打开了卡片链接
-      if(confirm("确认删除此节点吗？")) {
+      if (confirm("确认删除此节点吗？")) {
         const data = getData();
         data[category].splice(index, 1);
         saveData(data);
@@ -574,16 +574,16 @@
     function viewNote(index, event) {
       const data = getData();
       const note = data.notes[index];
-      
+
       // 分流逻辑一：如果在代码区域配置了真实文件的 url 路径
       if (note.url) {
         // 直接返回，允许 HTML 执行默认的超链接跳转，在新标签页打开文件
-        return; 
+        return;
       }
-      
+
       // 分流逻辑二：如果没有 url，说明是前端动态上传的
       event.preventDefault(); // 拦截页面跳转
-      if(note.content) {
+      if (note.content) {
         alert(`【${note.title}】\n\n${note.content}`);
       } else {
         alert("未检测到文件内容或路径配置错误。");
@@ -609,7 +609,7 @@
           </a>
         `).join('');
       });
-      
+
       // 📝 渲染笔记列表
       const notesContainer = document.getElementById('notes-grid');
       notesContainer.innerHTML = data.notes.map((note, index) => {
