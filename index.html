@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
     :root {
       /* 优化：调高背景不透明度，代替原本极其消耗性能的毛玻璃效果 */
       --bg-color: #050914;
-      --panel-bg: rgba(16, 22, 38, 0.95); 
+      --panel-bg: rgba(16, 22, 38, 0.95);
       --border-glow: rgba(0, 243, 255, 0.3);
       --text-main: #e2e8f0;
       --text-dim: #8ba3b8;
@@ -19,22 +20,27 @@
 
     /* 白天模式变量覆盖 */
     body.light-theme {
-      --bg-color: #f4f7fa;
-      --panel-bg: rgba(255, 255, 255, 0.95); /* 白天模式实体背景 */
-      --border-glow: rgba(0, 188, 212, 0.4);
+      --bg-color: #dddddd;
+      --panel-bg: rgba(255, 255, 255, 0.95);
+      /* 白天模式实体背景 */
+      --border-glow: rgba(0, 0, 0, 0);
       --text-main: #1e293b;
       --text-dim: #64748b;
-      --accent-cyan: #00acc1;
+      --accent-cyan: #000000;
       --accent-purple: #8e24aa;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background: var(--bg-color);
       /* 优化：简化了背景图案的层级 */
-      background-image: 
+      background-image:
         linear-gradient(0deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
       background-size: 30px 30px;
@@ -47,7 +53,7 @@
     }
 
     body.light-theme {
-      background-image: 
+      background-image:
         linear-gradient(0deg, rgba(0, 172, 193, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 172, 193, 0.03) 1px, transparent 1px);
     }
@@ -79,10 +85,12 @@
       z-index: 9999;
       user-select: none;
     }
+
     .theme-toggle-btn:hover {
       transform: scale(1.1);
       border-color: var(--accent-cyan);
     }
+
     .theme-toggle-btn:active {
       transform: scale(0.95);
     }
@@ -90,11 +98,13 @@
     /* 头部科幻发光字 */
     .header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 32px;
     }
+
     .header h1 {
-      font-size: 1.8em;
-      font-weight: 300;
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 16px;
       letter-spacing: 2px;
       color: var(--text-main);
       text-shadow: 0 0 8px var(--border-glow);
@@ -115,7 +125,7 @@
       overflow: hidden;
       transition: all 0.3s ease;
     }
-    
+
     .search-nexus select {
       background: transparent;
       color: var(--accent-cyan);
@@ -127,10 +137,12 @@
       cursor: pointer;
       appearance: none;
     }
-    .search-nexus select option { 
-      background: var(--bg-color); 
-      color: var(--text-main); 
+
+    .search-nexus select option {
+      background: var(--bg-color);
+      color: var(--text-main);
     }
+
     .search-nexus input {
       flex: 1;
       background: transparent;
@@ -140,9 +152,15 @@
       font-size: 1.1em;
       outline: none;
     }
-    body.light-theme .search-nexus input::placeholder { color: #a0aec0; }
-    body:not(.light-theme) .search-nexus input::placeholder { color: #4a5d73; }
-    
+
+    body.light-theme .search-nexus input::placeholder {
+      color: #a0aec0;
+    }
+
+    body:not(.light-theme) .search-nexus input::placeholder {
+      color: #4a5d73;
+    }
+
     .search-nexus button {
       padding: 0 30px;
       background: transparent;
@@ -154,6 +172,7 @@
       transition: all 0.3s;
       letter-spacing: 1px;
     }
+
     .search-nexus button:hover {
       background: rgba(0, 243, 255, 0.08);
     }
@@ -164,13 +183,15 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 12px;
       margin-bottom: 30px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
       transition: all 0.3s ease;
     }
+
     body.light-theme .glass-panel {
       border-color: rgba(0, 0, 0, 0.05);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
     }
+
     .panel-header {
       padding: 16px 24px;
       font-size: 1.1em;
@@ -180,7 +201,11 @@
       justify-content: space-between;
       align-items: center;
     }
-    body.light-theme .panel-header { border-bottom-color: rgba(0, 0, 0, 0.05); }
+
+    body.light-theme .panel-header {
+      border-bottom-color: rgba(0, 0, 0, 0.05);
+    }
+
     .add-btn {
       background: transparent;
       color: var(--text-dim);
@@ -191,6 +216,7 @@
       cursor: pointer;
       transition: 0.3s;
     }
+
     .add-btn:hover {
       color: var(--accent-cyan);
       border-color: var(--accent-cyan);
@@ -203,6 +229,7 @@
       gap: 15px;
       padding: 24px;
     }
+
     .link-item {
       display: flex;
       flex-direction: column;
@@ -214,49 +241,60 @@
       transition: all 0.2s;
       position: relative;
     }
+
     .link-item:hover {
       background: rgba(0, 243, 255, 0.05);
       border-color: var(--border-glow);
       transform: translateY(-2px);
     }
+
     .link-icon {
       width: 48px;
       height: 48px;
-      background: rgba(0,0,0,0.15);
+      background: rgba(0, 0, 0, 0.15);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 12px;
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
+
     body.light-theme .link-icon {
-      background: rgba(0,0,0,0.03);
-      border-color: rgba(0,0,0,0.05);
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.05);
     }
+
     .link-icon img {
       width: 28px;
       height: 28px;
       border-radius: 4px;
     }
+
     .link-name {
       font-size: 0.85em;
       color: var(--text-main);
       text-align: center;
     }
+
     .delete-btn {
       position: absolute;
-      top: 5px; right: 5px;
+      top: 5px;
+      right: 5px;
       background: rgba(255, 50, 50, 0.2);
       color: #ff5555;
       border: none;
       border-radius: 50%;
-      width: 20px; height: 20px;
+      width: 20px;
+      height: 20px;
       font-size: 12px;
       cursor: pointer;
       display: none;
     }
-    .link-item:hover .delete-btn { display: block; }
+
+    .link-item:hover .delete-btn {
+      display: block;
+    }
 
     /* 笔记网格 */
     .notes-grid {
@@ -265,9 +303,10 @@
       gap: 16px;
       padding: 24px;
     }
+
     .note-card {
-      background: rgba(0,0,0,0.1);
-      border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 8px;
       padding: 16px;
       transition: all 0.2s;
@@ -276,20 +315,24 @@
       position: relative;
       border-left: 3px solid var(--accent-purple);
     }
+
     body.light-theme .note-card {
-      background: rgba(0,0,0,0.02);
-      border-color: rgba(0,0,0,0.05);
+      background: rgba(0, 0, 0, 0.02);
+      border-color: rgba(0, 0, 0, 0.05);
     }
+
     .note-card:hover {
       background: rgba(188, 19, 254, 0.04);
       border-color: rgba(188, 19, 254, 0.2);
       transform: translateY(-2px);
     }
+
     .note-card h3 {
       font-size: 1em;
       margin-bottom: 8px;
       color: var(--text-main);
     }
+
     .note-card p {
       font-size: 0.85em;
       color: var(--text-dim);
@@ -299,6 +342,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+
     .note-date {
       display: block;
       margin-top: 12px;
@@ -306,7 +350,10 @@
       color: var(--text-dim);
       opacity: 0.6;
     }
-    .note-card:hover .delete-btn { display: block; }
+
+    .note-card:hover .delete-btn {
+      display: block;
+    }
 
     .footer {
       text-align: center;
@@ -315,9 +362,14 @@
       font-size: 0.8em;
       margin-top: 40px;
     }
-    .footer a { color: var(--accent-cyan); text-decoration: none; }
+
+    .footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
   </style>
 </head>
+
 <body>
 
   <div class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()" title="切换明暗模式">🌙</div>
@@ -356,7 +408,8 @@
     <div class="glass-panel">
       <div class="panel-header">
         <span>笔记文档</span>
-        <input type="file" id="noteUploader" style="display: none;" accept=".txt,.md" onchange="handleNoteUpload(event)">
+        <input type="file" id="noteUploader" style="display: none;" accept=".txt,.md"
+          onchange="handleNoteUpload(event)">
         <button class="add-btn" onclick="document.getElementById('noteUploader').click()">+ 上传文件</button>
       </div>
       <div class="notes-grid" id="notes-grid"></div>
@@ -368,44 +421,40 @@
   </div>
 
   <script>
-    // --- 辅助方法：生成国内可用的 Favicon 链接 ---
-    // 这里使用了国内专门的 api.iowen.cn 图标解析服务，速度快且不被墙
+    // --- 辅助方法：生成备用网络图标链接 ---
+    // 只有当你没有提供本地图标时，才会调用这个网络接口作为兜底方案
     function getFavicon(url) {
       try {
         const domain = new URL(url).hostname;
         return `https://icons.duckduckgo.com/ip3/${domain}.ico`;
-      } catch(e) {
+      } catch (e) {
         return "";
       }
     }
-    // 【方案二：国内备用：
-    // return `https://api.vvhan.com/api/ico?url=${domain}`;
-    // 【方案三：国外开源备用
-    // return `https://favicon.im/${domain}`;
-    
 
-    // --- 初始默认数据 (已更新为国内接口) ---
+    // --- 初始默认数据 (恢复为本地icon路径) ---
     const defaultData = {
       websites: [
-        { name: "马克思主义文库", url: "https://marxists.incn.tech", icon: getFavicon("https://marxists.incn.tech") },
-        { name: "GitHub", url: "https://github.com", icon: getFavicon("https://github.com") },
-        { name: "Cloudflare", url: "https://dash.cloudflare.com", icon: getFavicon("https://dash.cloudflare.com") },
-        { name: "哔哩哔哩", url: "https://www.bilibili.com", icon: getFavicon("https://www.bilibili.com") },
-        { name: "抖音", url: "https://www.douyin.com", icon: getFavicon("https://www.douyin.com") },
-        { name: "为道日损", url: "http://wdrs.uupan.net", icon: getFavicon("http://wdrs.uupan.net") }
+        { name: "马克思主义文库", url: "https://marxists.incn.tech/chinese/#:~:text=%E4%B8%AD%E6%96%87%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89%E6%96%87,%E5%B7%A6%E7%BF%BC%E7%90%86%E8%AE%BA%E8%B5%84%E6%BA%90%E5%BA%93%E3%80%82", icon: "icon/marxists.svg" },
+        { name: "GitHub", url: "https://github.com", icon: "icon/github.png" },
+        { name: "Cloudflare", url: "https://dash.cloudflare.com/72753bd9b4081846f2d8b0994c34f70d/home/overview", icon: "icon/Cloudflare.svg" },
+        { name: "哔哩哔哩", url: "https://www.bilibili.com", icon: "icon/bilibili.ico" },
+        { name: "抖音", url: "https://www.douyin.com/?recommend=1", icon: "icon/douyin.png" },
+        { name: "为道日损", url: "http://wdrs.uupan.net/", icon: "icon/wdrs.ico" }
       ],
       tools: [
-        { name: "Gemini", url: "https://gemini.google.com", icon: getFavicon("https://gemini.google.com") },
-        { name: "ChatGPT", url: "https://chatgpt.com", icon: getFavicon("https://chatgpt.com") },
-        { name: "DeepSeek", url: "https://chat.deepseek.com", icon: getFavicon("https://chat.deepseek.com") },
-        { name: "Kimi", url: "https://www.kimi.com", icon: getFavicon("https://www.kimi.com") },
-        { name: "Greasy Fork", url: "https://greasyfork.org", icon: getFavicon("https://greasyfork.org") },
-        { name: "CRX4", url: "https://www.crx4chrome.com", icon: getFavicon("https://www.crx4chrome.com") }
+        { name: "Gemini", url: "https://gemini.google.com/app", icon: "icon/Gemini.png" },
+        { name: "ChatGPT", url: "https://chatgpt.com", icon: "icon/ChatGPT.webp" },
+        { name: "DeepSeek", url: "https://chat.deepseek.com/", icon: "icon/DeepSeek.png" },
+        { name: "Kimi", url: "https://www.kimi.com/?chat_enter_method=new_chat", icon: "icon/Kimi.png" },
+        { name: "Greasy Fork", url: "https://greasyfork.org/zh-CN/scripts", icon: "icon/Greasy Fork.png" },
+        { name: "CRX4", url: "https://www.crx4chrome.com/", icon: "icon/CRX4.jpg" }
       ],
       notes: [
-        { id: 1, title: "我的 UI 设计原则", desc: "整理了一些工作中常用的设计原则和检查清单...", date: "2026-05-10" },
-        { id: 2, title: "前端学习路线 2026", desc: "从 HTML 到 React 的阶段学习路径与资源推荐。", date: "2026-04-28" },
-        { id: 3, title: "本周待办清单", desc: "优化个人主页 / 完成两个组件设计 / 阅读《设计心理学》...", date: "2026-05-12" }
+        { id: 1, title: "我的 UI 设计原则", desc: "整理了一些工作中常用的设计原则和检查清单...", date: "2026-05-10" , url: "pages/test.html"},
+        { id: 2, title: "前端学习路线 2026", desc: "从 HTML 到 React 的阶段学习路径与资源推荐。", date: "2026-04-28"},
+        { id: 3, title: "本周待办清单", desc: "优化个人主页 / 完成两个组件设计 / 阅读《设计心理学》...", date: "2026-05-12"},
+        { id: 4, title: "读书笔记：《设计心理学》", desc: "第一章：人类行为的复杂性 / 第二章：设计中的心理模型...", date: "2026-05-15"}
       ]
     };
 
@@ -429,6 +478,7 @@
 
     // --- 数据初始化管理 ---
     function initData() {
+      //localStorage.removeItem('eunoia_data'); // 开发阶段强制清除旧数据，正式使用时请注释掉这一行以保留用户数据
       if (!localStorage.getItem('eunoia_data')) {
         localStorage.setItem('eunoia_data', JSON.stringify(defaultData));
       }
@@ -459,26 +509,35 @@
       }
     }
 
-    // --- 动态添加书签 ---
+    // --- 动态添加书签 (支持指定本地图标) ---
     function addNewLink(category) {
-      const url = prompt("请输入要添加的网址:");
+      const url = prompt("1. 请输入要添加的网址 (如: https://www.taobao.com):");
       if (!url) return;
-      const name = prompt("请输入网站名称:");
+
+      const name = prompt("2. 请输入网站名称 (如: 淘宝):");
       if (!name) return;
 
-      const iconUrl = getFavicon(url);
-      if (!iconUrl) {
-        alert("网址格式不正确，请务必包含 http:// 或 https://");
-        return;
+      // 新增：询问用户本地图标的文件名
+      const localIcon = prompt("3. 请输入 icon 目录下的图标文件名 (如: taobao.png)。\n【注意】请确保你已经把图片放在了 icon 文件夹里。\n\n如果不想用本地图标，直接点击“确定”留空，系统会尝试从网络自动获取：");
+
+      let finalIconUrl = "";
+      if (localIcon && localIcon.trim() !== "") {
+        // 如果用户输入了文件名，就拼接到 icon/ 目录下
+        finalIconUrl = "icon/" + localIcon.trim();
+      } else {
+        // 如果留空，则使用备用的网络接口自动获取
+        finalIconUrl = getFavicon(url);
       }
-      
+
       const data = getData();
-      data[category].push({ name, url, icon: iconUrl });
+      data[category].push({ name, url, icon: finalIconUrl });
       saveData(data);
     }
 
+    // --- 删除项目功能（加入防冒泡优化） ---
     function deleteItem(category, index, event) {
-      event.preventDefault();
+      event.preventDefault();  // 阻止基础标签默认行为
+      event.stopPropagation(); // 核心核心：阻止事件冒泡！防止点击删除按钮时，错误地打开了卡片链接
       if(confirm("确认删除此节点吗？")) {
         const data = getData();
         data[category].splice(index, 1);
@@ -492,11 +551,11 @@
       if (!file) return;
 
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         const content = e.target.result;
         const desc = content.substring(0, 40).replace(/\n/g, ' ') + '...';
         const today = new Date().toISOString().split('T')[0];
-        
+
         const data = getData();
         data.notes.unshift({
           id: Date.now(),
@@ -511,22 +570,31 @@
       reader.readAsText(file);
     }
 
+    // --- 查看笔记逻辑分流 ---
     function viewNote(index, event) {
-      event.preventDefault();
       const data = getData();
       const note = data.notes[index];
+      
+      // 分流逻辑一：如果在代码区域配置了真实文件的 url 路径
+      if (note.url) {
+        // 直接返回，允许 HTML 执行默认的超链接跳转，在新标签页打开文件
+        return; 
+      }
+      
+      // 分流逻辑二：如果没有 url，说明是前端动态上传的
+      event.preventDefault(); // 拦截页面跳转
       if(note.content) {
         alert(`【${note.title}】\n\n${note.content}`);
       } else {
-        alert("这是演示笔记，具体内容请在代码中指向对应 Markdown 文件，或使用右侧按钮上传真实文本文件。");
+        alert("未检测到文件内容或路径配置错误。");
       }
     }
 
     // --- 渲染页面 UI ---
     function renderAll() {
       const data = getData();
-      
-      // 这里的 onerror 处理很重要：如果某个网站连国内接口都抓不到图标，就会显示一个默认的圆形小图标，不至于破图
+
+      // 破图兜底机制：如果本地没这个图片，或者网络获取失败，显示一个灰色小圆圈
       const fallbackSvg = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM4YmEzYjgiIHN0cm9rZS13aWR0aD0iMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48L3N2Zz4=";
 
       ['websites', 'tools'].forEach(category => {
@@ -541,23 +609,32 @@
           </a>
         `).join('');
       });
-
+      
+      // 📝 渲染笔记列表
       const notesContainer = document.getElementById('notes-grid');
-      notesContainer.innerHTML = data.notes.map((note, index) => `
-        <a href="#" onclick="viewNote(${index}, event)" class="note-card">
-          <button class="delete-btn" onclick="deleteItem('notes', ${index}, event)">×</button>
-          <h3>${note.title}</h3>
-          <p>${note.desc}</p>
-          <span class="note-date">${note.date}</span>
-        </a>
-      `).join('');
+      notesContainer.innerHTML = data.notes.map((note, index) => {
+        // 如果有 url 属性，超链接设为真实路径，否则设为 "#"
+        const href = note.url ? note.url : "#";
+        // 如果有 url 属性，在新标签页 (target="_blank") 打开该文件
+        const target = note.url ? 'target="_blank"' : '';
+
+        return `
+          <a href="${href}" ${target} onclick="viewNote(${index}, event)" class="note-card">
+            <button class="delete-btn" onclick="deleteItem('notes', ${index}, event)">×</button>
+            <h3>${note.title}</h3>
+            <p>${note.desc}</p>
+            <span class="note-date">${note.date}</span>
+          </a>
+        `;
+      }).join('');
     }
 
     // 初始化加载
-    window.onload = function() {
+    window.onload = function () {
       initTheme();
       initData();
     };
   </script>
 </body>
+
 </html>
