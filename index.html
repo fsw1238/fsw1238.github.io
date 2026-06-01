@@ -480,7 +480,7 @@
 
     // --- 数据初始化管理 ---
     function initData() {
-      //localStorage.removeItem('eunoia_data'); // 开发阶段强制清除旧数据，正式使用时请注释掉这一行以保留用户数据
+      localStorage.removeItem('eunoia_data'); // 开发阶段强制清除旧数据，正式使用时请注释掉这一行以保留用户数据
       if (!localStorage.getItem('eunoia_data')) {
         localStorage.setItem('eunoia_data', JSON.stringify(defaultData));
       }
