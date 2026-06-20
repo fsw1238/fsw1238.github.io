@@ -385,6 +385,7 @@
         <option value="bing">Bing</option>
         <option value="google">Google</option>
         <option value="baidu">Baidu</option>
+        <option value="yandex">Yandex</option>
       </select>
       <input type="text" id="searchInput" placeholder="" onkeydown="if(event.key==='Enter')executeSearch()">
       <button onclick="executeSearch()">搜 索</button>
@@ -500,7 +501,8 @@
     const engineUrls = {
       bing: 'https://cn.bing.com/search?q=',
       google: 'https://www.google.com/search?q=',
-      baidu: 'https://www.baidu.com/s?wd='
+      baidu: 'https://www.baidu.com/s?wd=',
+      yandex: 'https://yandex.com/search/?text='
     };
 
     function executeSearch() {
